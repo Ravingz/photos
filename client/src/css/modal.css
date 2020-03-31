@@ -1,0 +1,15 @@
+.image {
+    object-fit: contain;
+    max-width: 940px;
+    max-height: 705px;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    top: 107px;
+    left: 0%;
+    opacity: 100%;
+    object-fit: scale-down;
+  } 
+  .image img{
+    max-width: 940px;
+  }

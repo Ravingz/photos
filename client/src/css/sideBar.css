@@ -1,0 +1,21 @@
+.image {
+    justify-content: flex-start;
+    align-self: stretch;
+    /* flex-shrink: 2; */
+    max-width: 300px;
+    min-width: 147px;
+  
+    flex-direction: column;
+    flex-wrap: wrap;
+    object-fit: contain;
+    border-radius: 1% solid white;
+    border: 4px solid white;
+  }
+  
+  .image img{
+    max-width: 300px;
+    max-height: 165px;
+    border-radius: 5%;
+    min-width: 147px;
+    /* border: 5px solid white; */
+  }

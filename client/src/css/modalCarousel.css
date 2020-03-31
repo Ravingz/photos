@@ -1,0 +1,109 @@
+
+.button {
+    position: absolute;
+    /* top: 10%; */
+    width: 100%;
+    left: 72%;
+  }
+
+  .overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.5); /*dim the background*/
+  }
+
+  .fullModalContainer {
+    display: flex;
+    background-color: black;
+    width: 80%;
+    max-width:  940px;
+    height: 986px;
+    position: fixed;
+    left: 18%;
+    top: 5%;
+    border-top-left-radius: 1%;
+    border-bottom-left-radius: 1%;
+  }
+
+  .sideBarContainer {
+    display: flex;
+    width: 360px;
+    height: 926px;
+    border-bottom-right-radius: 1%;
+    border-top-right-radius: 1%;
+    position: absolute;
+    flex-flow: column;
+    left: 940px;
+    top: 0%;
+    align-self: stretch;
+    /* border: px solid white; */
+    overflow: hidden;
+    background-color: white;
+    padding: 30px;
+  }
+
+  .title {
+    border: 5px;
+    width: 300px;
+    height: 107px;
+    font-size: 16px;
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    font: Helvetica neue;
+    line-height: 21px;
+    padding-bottom:12px;
+  }
+  
+  .subtitle {
+    color: #0073bb;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font: Helvetica neue;
+    line-height: 18px;
+    padding-bottom: 6px;
+  }
+
+  .arrowRight {
+    cursor: pointer;
+    font-size: 1rem;
+    position: relative;
+    top: 40%;
+    left: 0%;
+    right: 1rem;
+    width: 18px;
+    height: 18px;
+    border-top: 6px solid white;
+    border-right: 6px solid white;
+    transform: rotate(45deg);
+    margin: 50px;
+    border-radius: 10%;
+    opacity: 75%;
+  }
+      .arrowRight:hover {
+        opacity: 100%;
+      }
+  
+  .arrowLeft {
+    cursor: pointer;
+    font-size: 1rem;
+    position: absolute;
+    top: 40%;
+    left: 0%;
+    width: 18px;
+    height: 18px;
+    border-top: 6px solid white;
+    border-right: 6px solid white;
+    transform: rotate(225deg);
+    margin: 50px;
+    border-radius: 10%;
+    opacity: 75%;
+  }
+      .arrowLeft:hover {
+        opacity: 100%;
+      }

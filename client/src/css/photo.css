@@ -1,0 +1,11 @@
+.image {
+    background-color: rgb(51, 51, 51);
+    margin: 10;
+    border: 2px solid white;
+    background-size: cover;
+    background-position: center;
+    align-self: stretch;
+    width: 446px;
+    height: 298px;
+    overflow: hidden;
+  }

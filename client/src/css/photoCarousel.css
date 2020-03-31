@@ -1,0 +1,42 @@
+.container {
+    position: absolute;
+  }
+  
+  .rightArrow {
+    cursor: pointer;
+    font-size: 1rem;
+    position: fixed;
+    top: 28%;
+    right: 1rem;
+    width: 18px;
+    height: 18px;
+    border-top: 6px solid white;
+    border-right: 6px solid white;
+    transform: rotate(45deg);
+    margin: 50px;
+    border-radius: 10%;
+    opacity: 75%;
+  }
+      .rightArrow:hover {
+        opacity: 100%;
+      }
+  
+  .leftArrow {
+    cursor: pointer;
+    font-size: 1rem;
+    position: fixed;
+    top: 28%;
+    left: 1rem;
+    width: 18px;
+    height: 18px;
+    border-top: 6px solid white;
+    border-right: 6px solid white;
+    transform: rotate(225deg);
+    margin: 50px;
+    border-radius: 10%;
+    opacity: 75%;
+  }
+      .leftArrow:hover {
+        opacity: 100%;
+      }
+

@@ -1,0 +1,14 @@
+
+.sidebar {
+    display: flex;
+    flex-direction: initial;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: auto;
+    align-self: stretch;
+    transition: transform .5s ease;
+    width: 360px;
+    height: 820px;
+    position: relative;
+    padding: 5px;
+  }
