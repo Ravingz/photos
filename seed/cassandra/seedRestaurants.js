@@ -17,7 +17,6 @@ async function seed() {
     restaurantid int, 
     name varchar, 
     createdat timestamp,
-    updatedat timestamp, 
     PRIMARY KEY (restaurantid)
     )`);
 
@@ -27,7 +26,7 @@ async function seed() {
 
   //counter 0 -> 1000000 -> ... -> 10000000
   const info = {
-    totalLength: 10000000,
+    totalLength: 1000000,
     counter: 0
   };
 
@@ -49,14 +48,13 @@ async function seed() {
 }
 
 async function executeOneAtATime(info) {
-  const query = `INSERT INTO restaurants (restaurantId, name, createdat,updateddat) VALUES (?, ?, ?, ?)`;
+  const query = `INSERT INTO restaurants (restaurantId, name, createdat) VALUES (?, ?, ?)`;
   const options = { prepare: true, isIdempotent: true };
 
   // Execute the queries
   while (info.counter++ < info.totalLength) {
     const createdat = (new Date()).toLocaleDateString();
-    const updateddat = (new Date()).toLocaleDateString();
-    const params = [ info.counter, faker.company.companyName(), createdat, updateddat ];
+    const params = [ info.counter, faker.company.companyName(), createdat ];
     await client.execute(query, params, options);
   }
 }

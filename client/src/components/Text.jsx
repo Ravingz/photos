@@ -12,7 +12,7 @@ const Text = ({ photo }) => {
     return(
         <div className={styles.text}> 
         <div className={styles.title}>{photo_title} {comment}</div>
-      <div className={styles.subtitle}>{date_added.slice(0, 10)}</div>
+      <div className={styles.subtitle}>{date_added}</div>
       <div className={styles.title}><li><BarMan />&nbsp;{user_name}</li></div>
       <div className={styles.subtitle}>
         <ul><PersonRed /><Person />

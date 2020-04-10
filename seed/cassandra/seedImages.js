@@ -16,11 +16,11 @@ async function seed() {
   await client.execute(`CREATE TABLE IF NOT EXISTS images_by_restaurant (
     imageid int, 
     restaurantid int, 
-    userid int, 
+    username varchar, 
+    profileurl text, 
     comment text, 
     imageurls list<text>, 
     createdat timestamp, 
-    updatedat timestamp, 
     PRIMARY KEY (restaurantid, imageid)
     )`);
 
@@ -51,22 +51,28 @@ async function seed() {
 }
 
 async function executeOneAtATime(info) {
-  const query = `INSERT INTO images_by_restaurant (imageid, restaurantid, userid, comment, imageurls, createdat, updatedat) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  const query = `INSERT INTO images_by_restaurant (imageid, restaurantid, username, profileurl, comment, imageurls, createdat) VALUES (?, ?, ?, ?, ?, ?, ?)`;
   const options = { prepare: true, isIdempotent: true };
 
   const imageurls = [] // generate this using s3 urls
   // random images
-  for(let i = 0; i < faker.random.number({min: 0, max: 3 }); i++) {
+  for(let i = 0; i < faker.random.number({min: 0, max: 5 }); i++) {
     imageurls.push(`https://ravingz.s3-us-west-1.amazonaws.com/${faker.random.number({max: 999, min: 0})}.jpg`);
   }
   
   // Execute the queries
   while (info.counter++ < info.totalLength) {
     const createdat = (new Date()).toLocaleDateString();
-    const updatedat = (new Date()).toLocaleDateString();
 
     //commentid varchar, restaurantid varchar, userid varchar, comment text, urls list<text>
-    const params = [info.counter, faker.random.number({min: 9999500, max: 10000000}), faker.random.number({min: 1, max: 1000}), faker.lorem.text(), imageurls, createdat, updatedat ];
+    const params = [
+      info.counter, 
+      faker.random.number({min: 999900, max: 1000000}), 
+      faker.name.findName(),  faker.lorem.text(), 
+      `https://i.pravatar.cc/150?img=${faker.random.number({min: 1, max: 70})}`,
+      imageurls, 
+      createdat];
+
     await client.execute(query, params, options);
   }
 }
