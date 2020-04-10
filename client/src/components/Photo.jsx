@@ -7,7 +7,7 @@ const Photo = ({ photo, index }) => {
   return (
     <div>
       <div className="flex-container">
-        <img className={styles.image} alt="" src={photo.url_address} index={index} />
+        <img className={styles.image} alt="" src={photo} index={index} />
       </div>
     </div>
   );

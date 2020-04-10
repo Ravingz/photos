@@ -68,8 +68,9 @@ async function executeOneAtATime(info) {
     const params = [
       info.counter, 
       faker.random.number({min: 999900, max: 1000000}), 
-      faker.name.findName(),  faker.lorem.text(), 
+      faker.name.findName(),  
       `https://i.pravatar.cc/150?img=${faker.random.number({min: 1, max: 70})}`,
+      faker.lorem.text(), 
       imageurls, 
       createdat];
 

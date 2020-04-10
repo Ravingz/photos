@@ -9,7 +9,7 @@
   "scripts": {
     "seed": "node db/seeders/dummyData.js",
     "start": "nodemon server/index.js",
-    "build:react": "webpack -d --watch",
+    "build": "webpack -d --watch",
     "test": "jest"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "@babel/preset-react": "^7.8.3",
     "@emotion/core": "^10.0.28",
     "aws-sdk": "^2.639.0",
+    "axios": "^0.19.2",
     "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
     "bufferutil": "^4.0.1",
@@ -31,7 +32,6 @@
     "dependency": "0.0.1",
     "express": "^4.17.1",
     "install": "^0.13.0",
-    "jquery": "^3.4.1",
     "jsdom": "^15.2.1",
     "mongo-seeding-cli": "^3.4.0",
     "mongoose": "^5.9.4",
