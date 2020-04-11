@@ -19,5 +19,5 @@ module.exports = async client => {
     imageurls list<text>, 
     createdat timestamp, 
     PRIMARY KEY (restaurantid, createdat, imageid)
-    ) WITH CLUSTERING ORDER BY (createdat DESC, imageid ASC)`);
+    )`);
 };

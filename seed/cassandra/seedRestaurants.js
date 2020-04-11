@@ -48,7 +48,7 @@ async function seed() {
 }
 
 async function executeOneAtATime(info) {
-  const query = `INSERT INTO restaurants (restaurantId, name, createdat) VALUES (?, ?, ?)`;
+  const query = `INSERT INTO restaurants (restaurantid, name, createdat) VALUES (?, ?, ?)`;
   const options = { prepare: true, isIdempotent: true };
 
   // Execute the queries
