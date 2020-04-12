@@ -67,7 +67,7 @@ async function executeOneAtATime(info) {
     //commentid varchar, restaurantid varchar, userid varchar, comment text, urls list<text>
     const params = [
       info.counter, 
-      faker.random.number({min: 999900, max: 1000000}), 
+      faker.random.number({min: 0, max: 1000}),
       faker.name.findName(),  
       `https://i.pravatar.cc/150?img=${faker.random.number({min: 1, max: 70})}`,
       faker.lorem.text(), 

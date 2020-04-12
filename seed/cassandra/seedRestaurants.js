@@ -26,7 +26,7 @@ async function seed() {
 
   //counter 0 -> 1000000 -> ... -> 10000000
   const info = {
-    totalLength: 1000000,
+    totalLength: 1000,
     counter: 0
   };
 
