@@ -22,7 +22,6 @@ class PhotoCarousel extends React.Component {
     this.setState({
       selectedPhoto: this.state.selectedPhoto - 1 || 0,
     });
-    // console.log('left arrow has been clicked', photos[this.state.selectedPhoto]);
   }
 
   nextPhoto() {
@@ -37,7 +36,6 @@ class PhotoCarousel extends React.Component {
     });
     // console.log('right arrow has been clicked', photos[this.state.selectedPhoto]);
   }
-
 
   render() {
     const { selectedPhoto } = this.state;

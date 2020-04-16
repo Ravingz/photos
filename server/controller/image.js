@@ -21,7 +21,6 @@ exports.create = async (req, res) => {
   }
 }
 
-// Not tested
 exports.update = async (req, res) => {
   try {
     await Image.update(req.params.imageid, req.body);
@@ -32,7 +31,6 @@ exports.update = async (req, res) => {
   }
 }
 
-// Not tested
 exports.remove = async (req, res) => {
   try {
     await Image.delete(req.params.imageid);

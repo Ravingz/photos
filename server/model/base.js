@@ -1,6 +1,5 @@
 const cassandra = require('cassandra-driver');
 const client = require('../db/connection');
-//const Uuid = cassandra.types.Uuid; // used in production
 
 class Base {
   constructor(name) {

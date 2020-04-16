@@ -19,9 +19,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/restaurants/1000000/images')
+    axios.get('/api/restaurants/9999900/images')
       .then(({ data }) => {
-
         const images = data.reduce((acc, next) => {
           if(next.imageurls) {
             acc = [...acc, ...next.imageurls];

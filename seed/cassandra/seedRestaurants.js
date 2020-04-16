@@ -4,7 +4,7 @@ const faker = require('faker');
 const cassandra = require('cassandra-driver');
 const Uuid = cassandra.types.Uuid;
 
-const client = new cassandra.Client({ contactPoints: ['127.0.0.1'], localDataCenter: 'datacenter1' });
+const client = new cassandra.Client({ contactPoints: ['54.215.116.117'], localDataCenter: 'datacenter1' });
 
 // Timer
 console.time('seed');
@@ -26,8 +26,8 @@ async function seed() {
 
   //counter 0 -> 1000000 -> ... -> 10000000
   const info = {
-    totalLength: 1000,
-    counter: 0
+    totalLength: 10000000,
+    counter: 9000000
   };
 
   // Launch in parallel n async operations (n being the concurrency level)

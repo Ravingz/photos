@@ -4,7 +4,7 @@ const faker = require('faker');
 const cassandra = require('cassandra-driver');
 const Uuid = cassandra.types.Uuid;
 
-const client = new cassandra.Client({ contactPoints: ['127.0.0.1'], localDataCenter: 'datacenter1' });
+const client = new cassandra.Client({ contactPoints: ['54.215.116.117'], localDataCenter: 'datacenter1' });
 
 // Timer
 console.time('seed');
@@ -25,12 +25,12 @@ async function seed() {
     )`);
 
   // The maximum amount of async executions that are going to be launched in parallel at any given time
-  const concurrencyLevel = 60;
+  const concurrencyLevel = 10;
   const promises = new Array(concurrencyLevel);
 
   const info = {
-    totalLength: 5000,
-    counter: 0
+    totalLength: 200958,
+    counter: 200958
   };
 
   // Launch in parallel n async operations (n being the concurrency level)
@@ -56,7 +56,7 @@ async function executeOneAtATime(info) {
 
   const imageurls = [] // generate this using s3 urls
   // random images
-  for(let i = 0; i < faker.random.number({min: 0, max: 5 }); i++) {
+  for(let i = 0; i < faker.random.number({min: 1, max: 5 }); i++) {
     imageurls.push(`https://ravingz.s3-us-west-1.amazonaws.com/${faker.random.number({max: 999, min: 0})}.jpg`);
   }
   
@@ -67,7 +67,7 @@ async function executeOneAtATime(info) {
     //commentid varchar, restaurantid varchar, userid varchar, comment text, urls list<text>
     const params = [
       info.counter, 
-      faker.random.number({min: 0, max: 1000}),
+      faker.random.number({min: 9999000, max: 10000000}),
       faker.name.findName(),  
       `https://i.pravatar.cc/150?img=${faker.random.number({min: 1, max: 70})}`,
       faker.lorem.text(), 

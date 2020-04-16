@@ -44,35 +44,29 @@ class ModalCarousel extends React.Component {
       <div>
         <div className={showHideClassName}>
           <div className={styles.overlay}>
-            <div className={styles.button}> 
-            <button onClick={handleClose}>close X</button>
-              </div>
-        
-              <div className={styles.fullModalContainer}>
+            <div className={styles.button}>
+              <button onClick={handleClose}>close X</button>
+            </div>
+
+            <div className={styles.fullModalContainer}>
+
               <div className={styles.sideBarContainer}>
-              <div className={styles.title} >
-                Photos for Restaurant Kitchen
-              <div className={styles.subtitle}>
-                See All {photos.length}
+                <div className={styles.title} >
+                  Photos for Restaurant Kitchen
+                  <div className={styles.subtitle}>  See All {photos.length} </div>
+                  <ModalSideBar photos={photos} />
                 </div>
-            <ModalSideBar photos={photos} />
+              </div>
+              
+              <ModalCard photos={photos} selectedPhotoIndex={selectedPhoto} />
+
+              <div className="arrows">
+                <div type="click" className={styles.arrowLeft} onClick={this.prevPhoto} />
+                <div type="click" className={styles.arrowRight} onClick={this.nextPhoto} />
+              </div>
+
             </div>
-            </div>
-            <ModalCard
-              photos={photos} selectedPhotoIndex={selectedPhoto} />
-         
-          <div className="arrows">
-          <div
-            type="click"
-            className={styles.arrowLeft}
-            onClick={this.prevPhoto}/>
-          <div
-            type="click"
-            className={styles.arrowRight}
-            onClick={this.nextPhoto}/>
-             </div>
-        </div>
-        </div>
+          </div>
         </div>
       </div>
     );
