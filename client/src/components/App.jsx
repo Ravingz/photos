@@ -3,6 +3,7 @@ import PhotoCarousel from './PhotoCarousel.jsx';
 import ModalCarousel from './ModalCarousel.jsx';
 import styles from '../css/app.css';
 import axios from 'axios';
+import faker from 'faker';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,24 +15,16 @@ class App extends React.Component {
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
-    // this.showPhotoCarousel = this.showPhotoCarousel.bind(this);
-    // this.hidePhotoCarousel = this.hidePhotoCarousel.bind(this);
   }
 
   componentDidMount() {
-    axios.get('/api/restaurants/9999900/images')
-      .then(({ data }) => {
-        const images = data.reduce((acc, next) => {
-          if(next.imageurls) {
-            acc = [...acc, ...next.imageurls];
-          }
-
-          return acc;
-        }, [])
-
+    const id = faker.random.number({min: 999990, max: 1000000})
+    axios.get(`/api/restaurants/${id}/images`)
+      .then(({ data: { rows, count } }) => {
         this.setState({
           ...this.state,
-          photos: images
+          photos: rows,
+          count
         });
         
       })
@@ -53,7 +46,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { photos, show, showCarousel } = this.state;
+    const { photos, show, count, showCarousel } = this.state;
     const showHideClassName = showCarousel ? `${styles.displayAll}` : `${styles.displayFade}`;
 
     return (
@@ -62,6 +55,7 @@ class App extends React.Component {
             <ModalCarousel
               photos={photos}
               show={show}
+              count={count}
               handleClose={this.hideModal}/>
           </div>
 
@@ -72,7 +66,7 @@ class App extends React.Component {
           
           <div className={styles.button}>
             <button type="button" onClick={this.showModal} >
-              See All {photos.length-1}
+              See All {count}
             </button>
           </div>
         </div>

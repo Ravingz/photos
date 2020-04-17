@@ -38,7 +38,7 @@ class ModalCarousel extends React.Component {
 
   render() {
     const { selectedPhoto } = this.state;
-    const { photos, show, handleClose } = this.props;
+    const { photos, show, handleClose, count} = this.props;
     const showHideClassName = show ? 'model display-block' : 'model display-none';
     return (
       <div>
@@ -53,7 +53,7 @@ class ModalCarousel extends React.Component {
               <div className={styles.sideBarContainer}>
                 <div className={styles.title} >
                   Photos for Restaurant Kitchen
-                  <div className={styles.subtitle}>  See All {photos.length} </div>
+                  <div className={styles.subtitle}>  See All {count} </div>
                   <ModalSideBar photos={photos} />
                 </div>
               </div>

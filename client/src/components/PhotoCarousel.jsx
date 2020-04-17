@@ -34,7 +34,6 @@ class PhotoCarousel extends React.Component {
     this.setState({
       selectedPhoto: this.state.selectedPhoto + 1,
     });
-    // console.log('right arrow has been clicked', photos[this.state.selectedPhoto]);
   }
 
   render() {

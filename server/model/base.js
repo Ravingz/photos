@@ -1,4 +1,3 @@
-const cassandra = require('cassandra-driver');
 const client = require('../db/connection');
 
 class Base {
@@ -7,7 +6,12 @@ class Base {
   }
 
   find(params = '') {
-    const query = `SELECT * from ravingz.${this.name} ${params && `WHERE ${keyValueForUpdate(params)}`}`;
+    const query = `SELECT * from ravingz.${this.name} ${params && `WHERE ${keyValueForUpdate(params)} AND shardkey = 1`}`;
+    return client.execute(query);
+  }
+
+  count(params = '') {
+    const query = `SELECT count(*) from ravingz.${this.name} ${params && `WHERE ${keyValueForUpdate(params)}`}`;
     return client.execute(query);
   }
 

@@ -23,7 +23,8 @@ exports.getRestaurant = async (req, res) => {
 exports.getRestaurantImages = async (req, res) => {
   try {
     const result = await Image.find({ restaurantid: req.params.restaurantid });
-    res.json(result.rows);
+    const length = await Image.count({ restaurantid: req.params.restaurantid });
+    res.json({ rows: result.rows, count: length.rows[0].count });
 
   } catch (error) {
     console.log(error)

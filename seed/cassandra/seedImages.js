@@ -4,7 +4,7 @@ const faker = require('faker');
 const cassandra = require('cassandra-driver');
 const Uuid = cassandra.types.Uuid;
 
-const client = new cassandra.Client({ contactPoints: ['54.215.116.117'], localDataCenter: 'datacenter1' });
+const client = new cassandra.Client({ contactPoints: ['13.56.253.60'], localDataCenter: 'datacenter1' });
 
 // Timer
 console.time('seed');
@@ -14,23 +14,27 @@ async function seed() {
   await client.execute(`CREATE KEYSPACE IF NOT EXISTS ravingz WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1' }`);
   await client.execute(`USE ravingz`);
   await client.execute(`CREATE TABLE IF NOT EXISTS images_by_restaurant (
-    imageid int, 
-    restaurantid int, 
-    username varchar, 
-    profileurl text, 
-    comment text, 
-    imageurls list<text>, 
-    createdat timestamp, 
-    PRIMARY KEY (restaurantid, imageid)
-    )`);
+      imageid int, 
+      restaurantid int,
+      shardkey int, 
+      username varchar, 
+      profileurl text, 
+      caption text, 
+      url text, 
+      createdat timestamp, 
+      PRIMARY KEY (restaurantid, shardkey, imageid)
+    ) WITH CLUSTERING ORDER BY (shardkey DESC, imageid DESC);`);
 
   // The maximum amount of async executions that are going to be launched in parallel at any given time
-  const concurrencyLevel = 10;
+  const concurrencyLevel = 20;
   const promises = new Array(concurrencyLevel);
 
   const info = {
-    totalLength: 200958,
-    counter: 200958
+    totalLength: faker.random.number({min: 5, max: 1200}), // 201158
+    counter: -1,
+    resCounter: 999990,
+    resMax: 1000000,
+    shardkey: 0
   };
 
   // Launch in parallel n async operations (n being the concurrency level)
@@ -51,30 +55,38 @@ async function seed() {
 }
 
 async function executeOneAtATime(info) {
-  const query = `INSERT INTO images_by_restaurant (imageid, restaurantid, username, profileurl, comment, imageurls, createdat) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  const query = `INSERT INTO images_by_restaurant (imageid, restaurantid, shardkey, username, profileurl, caption, url, createdat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
   const options = { prepare: true, isIdempotent: true };
 
-  const imageurls = [] // generate this using s3 urls
-  // random images
-  for(let i = 0; i < faker.random.number({min: 1, max: 5 }); i++) {
-    imageurls.push(`https://ravingz.s3-us-west-1.amazonaws.com/${faker.random.number({max: 999, min: 0})}.jpg`);
-  }
-  
-  // Execute the queries
-  while (info.counter++ < info.totalLength) {
-    const createdat = (new Date()).toLocaleDateString();
+  while (info.resCounter <= info.resMax) {
 
-    //commentid varchar, restaurantid varchar, userid varchar, comment text, urls list<text>
-    const params = [
-      info.counter, 
-      faker.random.number({min: 9999000, max: 10000000}),
-      faker.name.findName(),  
-      `https://i.pravatar.cc/150?img=${faker.random.number({min: 1, max: 70})}`,
-      faker.lorem.text(), 
-      imageurls, 
-      createdat];
+    // Execute the queries
+    while (info.counter++ < info.totalLength) {
+      const createdat = (new Date()).toLocaleDateString();
 
-    await client.execute(query, params, options);
+      if(info.counter % 30 === 0) {
+        info.shardkey += 1;
+      }
+
+      //commentid varchar, restaurantid varchar, userid varchar, comment text, urls list<text>
+      const params = [
+        info.counter, 
+        info.resCounter,
+        info.shardkey,
+        faker.name.findName(),  
+        `https://i.pravatar.cc/150?img=${faker.random.number({min: 1, max: 70})}`,
+        faker.lorem.sentences(3), 
+        `https://ravingz.s3-us-west-1.amazonaws.com/${faker.random.number({max: 999, min: 0})}.jpg`, 
+        createdat
+      ];
+
+      await client.execute(query, params, options);
+    }
+
+    info.totalLength = faker.random.number({min: 5, max: 1200});
+    info.counter = -1,
+    info.resCounter += 1;
+    info.shardkey = 0;
   }
 }
 
