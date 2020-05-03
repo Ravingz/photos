@@ -1,4 +1,5 @@
 const { Restaurant, Image } = require('../model/base');
+const { cache } = require('../db/connection');
 
 exports.getRestaurantsAll = async (req, res) => {
   try {
@@ -22,9 +23,18 @@ exports.getRestaurant = async (req, res) => {
 
 exports.getRestaurantImages = async (req, res) => {
   try {
-    const result = await Image.find({ restaurantid: req.params.restaurantid });
-    const length = await Image.count({ restaurantid: req.params.restaurantid });
-    res.json({ rows: result.rows, count: length.rows[0].count });
+    const restaurantid = req.params.restaurantid;
+    const images = cache.get(restaurantid);
+    let result = undefined;
+
+    if(!images) {
+      result = await Image.find({ restaurantid });
+      cache.set(restaurantid, result.rows, 600);
+      res.json({ rows: result.rows, count: 123 });
+
+    } else {
+      res.json({ rows: images, count: 123 });
+    }
 
   } catch (error) {
     console.log(error)

@@ -1,7 +1,7 @@
 require('newrelic');
 const express = require('express');
 const path = require('path');
-const client = require('./db/connection');
+const { client } = require('./db/connection');
 const init = require('./db/init')
 const app = express();
 

@@ -1,4 +1,4 @@
-const client = require('../db/connection');
+const { client } = require('../db/connection');
 
 class Base {
   constructor(name) {

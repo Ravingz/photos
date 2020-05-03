@@ -1,6 +1,6 @@
 module.exports = async client => {
   await client.connect();
-  await client.execute(`CREATE KEYSPACE IF NOT EXISTS ravingz WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1' }`);
+  //await client.execute(`CREATE KEYSPACE IF NOT EXISTS ravingz WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1' }`);
   await client.execute(`USE ravingz`);
 
   await client.execute(`CREATE TABLE IF NOT EXISTS restaurants (

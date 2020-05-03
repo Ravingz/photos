@@ -18,8 +18,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const id = faker.random.number({min: 999990, max: 1000000})
-    axios.get(`/api/restaurants/${id}/images`)
+    const id = faker.random.number({min: 0, max: 1000})
+    axios.get(`/api/restaurants/${9999000 + id}/images`)
       .then(({ data: { rows, count } }) => {
         this.setState({
           ...this.state,

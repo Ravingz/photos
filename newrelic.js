@@ -10,7 +10,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['see-all-photos'],
+  app_name: ['see-all-photos-ec2'],
   /**
    * Your New Relic license key.
    */
